@@ -16,18 +16,19 @@ export default function Menu() {
 }
 
 const Wrapper = styled.div`
-height: 100%;
-width: 240px;
 background-color:#272D3E;
 `
 const Ul = styled.ul`
-margin:70px 0 0;
+width: 240px;
 height: 100%;
+
+margin:70px 0 0;
 padding: 48px 0 0;
 background-color:#2D3347;
 
 `
 const Li = styled.li`
+
 display:flex;
 padding: 14px 32px;
 list-style-type: none;
