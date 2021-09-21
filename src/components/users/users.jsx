@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import styled from 'styled-components'
+import axios from 'axios'
 
 
 
-const fetchUsers = async (page = 1, sort = '', order = '') => {
-  const res = await fetch(`https://brainstorm-interview-task.herokuapp.com/users?_page=${page}&_sort=${sort}&_order=${order}`)
+// const fetchUsers = async (page = 1, sort = '', order = '') => {
+//   const res = await fetch(`https://brainstorm-interview-task.herokuapp.com/users?_page=${page}&_sort=${sort}&_order=${order}`)
 
-  return res.json()
+//   return res.json()
+// }
+async function fetchUsers(page, sort, order) {
+  const { data } = await axios.get(`https://brainstorm-interview-task.herokuapp.com/users?_page=${page}&_sort=${sort}&_order=${order}`)
+  return data
 }
-
 
 
 
@@ -26,6 +30,45 @@ export default function Users() {
     isPreviousData,
   } = useQuery(['projects', page, sort, order], () => fetchUsers(page, sort, order), { keepPreviousData: true })
 
+
+  // useEffect(() => {
+  //   fetch('https://brainstorm-interview-task.herokuapp.com/users/156775160000102', {
+  //     method: 'PATCH',
+  //     body: JSON.stringify({
+  //       'name': 'DJMAMBoooo'
+  //     }),
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     }
+
+
+  //   }).then(res => res.json()).then(data => console.log(data))
+
+  // }, []);
+  const datas = {
+    "id": Math.random(),
+    "name": "AAA",
+    "email": "aramayishovhannisyan@gmail.com",
+    "photo": "https://graph.facebook.com/3341611219220/picture?type=square",
+    "location": "New York",
+    "registeredDate": "2020-10-22T06:47:56.065Z",
+    "lastActiveDate": "2020-10-22T06:47:56.065Z",
+    "disabled": false
+  }
+  useEffect(() => {
+    const requestOptions = {
+      method: 'POST',
+      body: JSON.stringify(datas),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    }
+    fetch('https://brainstorm-interview-task.herokuapp.com/users', requestOptions).then(response => response.json())
+
+
+  }, []);
   const sorting = (sort, order) => {
 
     setSort(sort)
@@ -71,7 +114,7 @@ export default function Users() {
         >
           Next Page
         </button>
-        <button onClick={() => sorting()}>Sorting</button>
+        <button onClick={() => sorting('name', 'asc')}>Sorting</button>
         <button onClick={() => setPage(10)}>last</button>
         <button onClick={() => setPage(1)}>first</button>
       </>
@@ -97,6 +140,7 @@ const Table = styled.table`
 width: 100%;
 border-collapse: collapse;
 min-width: 1100px;
+box-sizing:border-box;
 
 tr{
    box-sizing: border-box;
