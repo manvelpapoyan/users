@@ -3,10 +3,10 @@ import { useQuery } from 'react-query'
 import styled from 'styled-components'
 import { getDeletedUser, getUsers } from '../../app/api'
 import CreateUser from './createUser'
+import EditUser from './editUser'
 import User from './user'
 
 export default function Users() {
-
 
 
 
@@ -20,7 +20,7 @@ export default function Users() {
     data,
     isFetching,
     isPreviousData,
-  } = useQuery(['projects', page, sort, order], () => getUsers(page, sort, order), { keepPreviousData: true })
+  } = useQuery(['projects', page, sort, order], () => getUsers(page, sort, order))
 
 
 

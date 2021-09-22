@@ -8,7 +8,7 @@ const User = ({ props }) => {
   return (
     <tr >
       <td>Ch</td>
-      <td><img style={{ cursor: 'pointer' }} src={photo} alt='' onClick={() => hystory.push('/edit')} /></td>
+      <td><img style={{ cursor: 'pointer' }} src={photo} alt='' onClick={() => hystory.push(`/edit?id=${id}`)} /></td>
       <td><div style={{ cursor: 'pointer' }} onClick={() => getDeletedUser(props.id)}>{name}</div></td>
       <td> {location}</td>
       <td>{registeredDate} </td>

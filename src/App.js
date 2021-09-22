@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import Menu from "./components/menu/menu";
 import Users from "./components/users/users";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CreateUser from "./components/users/createUser";
 import EditUser from "./components/users/editUser";
 

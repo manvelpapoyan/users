@@ -1,49 +1,38 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { getCreatedUser } from "../../app/api";
-const initialFormData = Object({
-  name: "",
-  email: "",
-  location: '',
-  photo: '',
+import { createUser } from "../../app/api";
+const initialData = {
   "registeredDate": "2020-10-22T06:47:56.065Z",
   "lastActiveDate": "2020-10-22T06:47:56.065Z",
   "disabled": false
-});
+};
 
 
 const CreateUser = () => {
-  const [formData, updateFormData] = useState(initialFormData);
-  const [value, setValue] = useState(undefined);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [location, setLocation] = useState('');
+  const [photo, setPhoto] = useState(null);
 
-  const handleChange = (e) => {
-    updateFormData({
-      ...formData,
-      // Trimming any whitespace
-      [e.target.name]: e.target.value.trim()
-    });
-  };
 
-  const handleChangePhoto = (e) => {
-    console.log(e.target.fil)
-    updateFormData({
-      ...formData,
-      [e.target.name]: e.target.files[0]
-    });
-
-  };
   const handleSubmit = (e) => {
     e.preventDefault()
-    getCreatedUser(formData)
-    setValue('')
+    const data = { ...initialData, name, email, location, photo }
+    createUser(data)
+    setPhoto(null)
+    setName('')
+    setEmail('')
+    setLocation('')
+
   };
+
 
   return (
     <Container>
-      <StyledInput name="name" onfocus="this.placeholder=''" value={value} placeholder='User Name' onChange={handleChange} />
-      <StyledInput type='file' value={value} name='photo' onChange={handleChangePhoto} />
-      <StyledInput name="email" value={value} placeholder='Email' onChange={handleChange} />
-      <StyledInput name="location" value={value} placeholder='Location' onChange={handleChange} />
+      <StyledInput name="name" value={name} placeholder='User Name' onChange={(e) => setName(e.target.value)} />
+      <StyledInput type='file' name='photo' onChange={(e) => setPhoto(e.target.files[0])} />
+      <StyledInput name="email" value={email} placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
+      <StyledInput name="location" value={location} placeholder='Location' onChange={(e) => setLocation(e.target.value)} />
 
 
 

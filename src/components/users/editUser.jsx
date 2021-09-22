@@ -1,54 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getCreatedUser } from "../../app/api";
-const initialFormData = Object({
-  name: "",
-  email: "",
-  location: '',
-  photo: '',
-  "registeredDate": "2020-10-22T06:47:56.065Z",
-  "lastActiveDate": "2020-10-22T06:47:56.065Z",
-  "disabled": false
-});
+import { getSingleUser } from "../../app/api";
 
 
-const EditUser = ({ id }) => {
-  console.log(id)
-  const [formData, updateFormData] = useState(initialFormData);
-  const [value, setValue] = useState(undefined);
+const EditUser = () => {
+  const [user, setUser] = useState()
+  const data = {}
 
-  const handleChange = (e) => {
-    updateFormData({
-      ...formData,
-      // Trimming any whitespace
-      [e.target.name]: e.target.value.trim()
-    });
-  };
 
-  const handleChangePhoto = (e) => {
-    console.log(e.target.fil)
-    updateFormData({
-      ...formData,
-      [e.target.name]: e.target.files[0]
-    });
 
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    getCreatedUser(formData)
-    setValue('')
-  };
+
+  useEffect(() => {
+    (async function () {
+      const { search } = window.location
+      const id = new URLSearchParams(search).get('id')
+      const userData = await getSingleUser(id)
+      setUser(userData)
+    })()
+  }, [])
+
 
   return (
     <Container>
-      <StyledInput name="name" onfocus="this.placeholder=''" value={value} placeholder='User Name' onChange={handleChange} />
-      <StyledInput type='file' value={value} name='photo' onChange={handleChangePhoto} />
-      <StyledInput name="email" value={value} placeholder='Email' onChange={handleChange} />
-      <StyledInput name="location" value={value} placeholder='Location' onChange={handleChange} />
 
 
 
-      <button onClick={handleSubmit}>Submit</button>
+
     </Container>
   );
 };
