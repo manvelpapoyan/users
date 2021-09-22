@@ -23,7 +23,6 @@ function App() {
 					<Route path='/edit'>
 						<EditUser />
 					</Route>
-					<Route path='/edit' render={(props) => <EditUser {...props} />} />
 				</Switch>
 			</Router>
 		</div>

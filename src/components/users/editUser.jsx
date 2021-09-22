@@ -12,8 +12,8 @@ const initialFormData = Object({
 });
 
 
-const EditUser = ({ name }) => {
-  console.log(name)
+const EditUser = ({ id }) => {
+  console.log(id)
   const [formData, updateFormData] = useState(initialFormData);
   const [value, setValue] = useState(undefined);
 
