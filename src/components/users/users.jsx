@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import styled from 'styled-components'
 import { getDeletedUser, getUsers } from '../../app/api'
-import CreateUser from './createuser'
+import CreateUser from './createUser'
 import User from './user'
 
 export default function Users() {
