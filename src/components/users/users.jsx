@@ -1,23 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import styled from 'styled-components'
-import axios from 'axios'
-
-
-
-// const fetchUsers = async (page = 1, sort = '', order = '') => {
-//   const res = await fetch(`https://brainstorm-interview-task.herokuapp.com/users?_page=${page}&_sort=${sort}&_order=${order}`)
-
-//   return res.json()
-// }
-async function fetchUsers(page, sort, order) {
-  const { data } = await axios.get(`https://brainstorm-interview-task.herokuapp.com/users?_page=${page}&_sort=${sort}&_order=${order}`)
-  return data
-}
-
-
+import { getDeletedUser, getUsers } from '../../app/api'
+import CreateUser from './createuser'
+import User from './user'
 
 export default function Users() {
+
+
+
+
   const [page, setPage] = useState(1)
   const [sort, setSort] = useState('')
   const [order, setOrder] = useState('')
@@ -28,24 +20,10 @@ export default function Users() {
     data,
     isFetching,
     isPreviousData,
-  } = useQuery(['projects', page, sort, order], () => fetchUsers(page, sort, order), { keepPreviousData: true })
+  } = useQuery(['projects', page, sort, order], () => getUsers(page, sort, order), { keepPreviousData: true })
 
 
-  // useEffect(() => {
-  //   fetch('https://brainstorm-interview-task.herokuapp.com/users/156775160000102', {
-  //     method: 'PATCH',
-  //     body: JSON.stringify({
-  //       'name': 'DJMAMBoooo'
-  //     }),
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     }
 
-
-  //   }).then(res => res.json()).then(data => console.log(data))
-
-  // }, []);
   const datas = {
     "id": Math.random(),
     "name": "AAA",
@@ -56,25 +34,9 @@ export default function Users() {
     "lastActiveDate": "2020-10-22T06:47:56.065Z",
     "disabled": false
   }
-  useEffect(() => {
-    const requestOptions = {
-      method: 'POST',
-      body: JSON.stringify(datas),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-    }
-    fetch('https://brainstorm-interview-task.herokuapp.com/users', requestOptions).then(response => response.json())
-
-
-  }, []);
   const sorting = (sort, order) => {
-
     setSort(sort)
     setOrder(order)
-
-
   }
   return (
     <Container >
@@ -110,7 +72,7 @@ export default function Users() {
             }
           }}
           //Api doesn't have has.more property beacause i disable button manualy
-          disabled={page === 10}
+          disabled={page === 20}
         >
           Next Page
         </button>
@@ -118,22 +80,17 @@ export default function Users() {
         <button onClick={() => setPage(10)}>last</button>
         <button onClick={() => setPage(1)}>first</button>
       </>
-
-
+      <CreateUser />
     </Container>
 
   )
 }
-
-
 
 const Container = styled.div`
 width: 100%;
 background-color: #fff;
 padding: 0 42px;
 overflow-x: auto;
-
-
 `
 
 const Table = styled.table`
@@ -141,11 +98,9 @@ width: 100%;
 border-collapse: collapse;
 min-width: 1100px;
 box-sizing:border-box;
-
 tr{
    box-sizing: border-box;
 }
-
 th{
   padding: 20px 0;
   font-weight: 600;
@@ -154,19 +109,15 @@ th{
   color: #788195;
   border: none;
   background: #F1F3F5;
-
-
 }
 td{
   text-align: center;
-
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 14px;
   color: #878787;
   padding: 10px 0;
-
   img{
     width: 40px;
     height: 40px;
@@ -178,18 +129,4 @@ td{
 
 
 
-const User = ({ props }) => {
-  const { photo, name, location, registeredDate, lastActiveDate, email, disabled } = props
-  return (
-    <tr >
-      <td>Ch</td>
-      <td><img src={photo} alt='' /></td>
-      <td>{name}</td>
-      <td> {location}</td>
-      <td>{registeredDate} </td>
-      <td> {lastActiveDate}</td>
-      <td>{email} </td>
-      <td>{disabled} </td>
-    </tr>
-  )
-}
+
