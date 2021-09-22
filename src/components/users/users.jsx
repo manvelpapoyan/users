@@ -1,39 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import styled from 'styled-components'
-import { getDeletedUser, getUsers } from '../../app/api'
-import CreateUser from './createUser'
-import EditUser from './editUser'
+import { getUsers } from '../../app/api'
 import User from './user'
 
 export default function Users() {
-
-
 
   const [page, setPage] = useState(1)
   const [sort, setSort] = useState('')
   const [order, setOrder] = useState('')
   const {
-    isLoading,
-    isError,
-    error,
     data,
-    isFetching,
     isPreviousData,
   } = useQuery(['projects', page, sort, order], () => getUsers(page, sort, order))
 
-
-
-  const datas = {
-    "id": Math.random(),
-    "name": "AAA",
-    "email": "aramayishovhannisyan@gmail.com",
-    "photo": "https://graph.facebook.com/3341611219220/picture?type=square",
-    "location": "New York",
-    "registeredDate": "2020-10-22T06:47:56.065Z",
-    "lastActiveDate": "2020-10-22T06:47:56.065Z",
-    "disabled": false
-  }
   const sorting = (sort, order) => {
     setSort(sort)
     setOrder(order)
@@ -44,7 +24,7 @@ export default function Users() {
         <Table>
           <thead>
             <tr>
-              <th>Ch</th>
+              <th></th>
               <th>Photo</th>
               <th>Name</th>
               <th>Location</th>
@@ -80,7 +60,6 @@ export default function Users() {
         <button onClick={() => setPage(10)}>last</button>
         <button onClick={() => setPage(1)}>first</button>
       </>
-      <CreateUser />
     </Container>
 
   )

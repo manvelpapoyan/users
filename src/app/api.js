@@ -28,6 +28,7 @@ const createUser = async (data) => {
 		photo,
 	});
 };
+
 const postPhoto = async (photo) => {
 	console.log(photo);
 	const formData = new FormData();
@@ -40,7 +41,8 @@ const postPhoto = async (photo) => {
 		},
 	});
 };
-const getUpdatedUser = async (id, data) => {
+
+const updatedUser = async (id, data) => {
 	if (data.photo) {
 		const photoResponse = await postPhoto(data.photo);
 		data.photo = photoResponse.data.url;
@@ -49,8 +51,8 @@ const getUpdatedUser = async (id, data) => {
 	await axios.patch(`${URL}/users/${id}`, data);
 };
 
-const getDeletedUser = async (id) => {
+const deleteUser = async (id) => {
 	await axios.delete(`${URL}/users/${id}`);
 };
 
-export { getUsers, createUser, getUpdatedUser, getDeletedUser, getSingleUser };
+export { getUsers, createUser, updatedUser, deleteUser, getSingleUser };

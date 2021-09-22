@@ -1,4 +1,4 @@
-import { getDeletedUser } from "../../app/api"
+import { deleteUser } from "../../app/api"
 import { useHistory } from "react-router"
 const User = ({ props }) => {
 
@@ -9,7 +9,7 @@ const User = ({ props }) => {
     <tr >
       <td>Ch</td>
       <td><img style={{ cursor: 'pointer' }} src={photo} alt='' onClick={() => hystory.push(`/edit?id=${id}`)} /></td>
-      <td><div style={{ cursor: 'pointer' }} onClick={() => getDeletedUser(props.id)}>{name}</div></td>
+      <td><div style={{ cursor: 'pointer' }} onClick={() => deleteUser(props.id)}>{name}</div></td>
       <td> {location}</td>
       <td>{registeredDate} </td>
       <td> {lastActiveDate}</td>

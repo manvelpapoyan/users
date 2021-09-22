@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 import { createUser } from "../../app/api";
 const initialData = {
@@ -9,6 +10,7 @@ const initialData = {
 
 
 const CreateUser = () => {
+  const history = useHistory()
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [location, setLocation] = useState('');
@@ -23,6 +25,8 @@ const CreateUser = () => {
     setName('')
     setEmail('')
     setLocation('')
+    history.push('/')
+
 
   };
 
