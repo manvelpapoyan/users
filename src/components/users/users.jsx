@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import styled from 'styled-components'
 import { getUsers } from '../../app/api'
+import Header from '../header/header'
+import Pagination from '../pagination/pagination'
 import User from './user'
 
 export default function Users() {
@@ -12,15 +14,17 @@ export default function Users() {
   const {
     data,
     isPreviousData,
-  } = useQuery(['projects', page, sort, order], () => getUsers(page, sort, order))
+  } = useQuery(['projects', page, sort, order], () => getUsers(page, sort, order), { keepPreviousData: true })
 
   const sorting = (sort, order) => {
     setSort(sort)
     setOrder(order)
   }
+
   return (
     <Container >
-      <>
+      <Header text='All Users' />
+      <TableContainer>
         <Table>
           <thead>
             <tr>
@@ -38,37 +42,23 @@ export default function Users() {
             {data?.map(user => <User key={user.id} props={user} />)}
           </tbody>
         </Table>
-        <span>Current Page: {page}</span>
-        <button
-          onClick={() => setPage(old => Math.max(old - 1, 1))}
-          disabled={page === 1}
-        >
-          Previous Page
-        </button>{' '}
-        <button
-          onClick={() => {
-            if (!isPreviousData) {
-              setPage(old => old + 1)
-            }
-          }}
-          //Api doesn't have has.more property beacause i disable button manualy
-          disabled={page === 20}
-        >
-          Next Page
-        </button>
         <button onClick={() => sorting('name', 'asc')}>Sorting</button>
-        <button onClick={() => setPage(10)}>last</button>
-        <button onClick={() => setPage(1)}>first</button>
-      </>
+      </TableContainer>
+      <Pagination page={page} isPreviousData={isPreviousData} setPage={setPage} />
     </Container>
 
   )
 }
 
+
+
+
 const Container = styled.div`
 width: 100%;
 background-color: #fff;
 padding: 0 42px;
+`
+const TableContainer = styled.div`
 overflow-x: auto;
 `
 
