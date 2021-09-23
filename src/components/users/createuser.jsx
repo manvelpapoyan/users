@@ -31,6 +31,7 @@ const CreateUser = () => {
     setName('')
     setEmail('')
     setLocation('')
+    history.push('./')
   };
 
 

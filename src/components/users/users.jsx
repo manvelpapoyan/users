@@ -14,6 +14,7 @@ export default function Users() {
   const [page, setPage] = useState(1)
   const [sort, setSort] = useState('')
   const [order, setOrder] = useState('asc')
+
   const {
     data,
     isPreviousData,
@@ -27,6 +28,7 @@ export default function Users() {
       setOrder('asc')
     }
   }
+
 
   return (
     <Container >
@@ -49,7 +51,6 @@ export default function Users() {
             {data?.map(user => <User key={user.id} props={user} />)}
           </tbody>
         </Table>
-        <button onClick={() => sorting('name', 'asc')}>Sorting</button>
       </TableContainer>
       <Pagination page={page} isPreviousData={isPreviousData} setPage={setPage} />
     </Container>
