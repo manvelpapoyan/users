@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { StyledButton } from "../users/styles"
 
 const Header = ({ text, onClick, buttonText }) => {
 
@@ -33,14 +34,3 @@ margin: 0 20px;
 `
 
 
-export const StyledButton = styled.button`
-min-width: 114px;
-height:36px;
-border-radius:4px;
-background-color: #407eff;
-border:none;
-color:#fff;
-
-
-
-`

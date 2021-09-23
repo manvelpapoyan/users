@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { getUsers } from '../../app/api'
 import Header from '../header/header'
 import Pagination from '../pagination/pagination'
+import { Container } from './styles'
 import User from './user'
 
 export default function Users() {
@@ -54,10 +55,7 @@ export default function Users() {
 
 
 
-export const Container = styled.div`
-width: 100%;
-padding: 0 42px;
-`
+
 const TableContainer = styled.div`
 overflow-x: auto;
 `

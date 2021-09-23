@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
-import styled from "styled-components";
 import { createUser } from "../../app/api";
-import Header, { StyledButton } from "../header/header";
-import { Container } from "./users";
+import Header from "../header/header";
+import { Container, InputContainer, StyledButton, StyledInput, StyledLabel } from "./styles";
+import { ReactComponent as Photo } from '../assets/photo.svg'
+
+
+
 const initialData = {
   "registeredDate": "2020-10-22T06:47:56.065Z",
   "lastActiveDate": "2020-10-22T06:47:56.065Z",
@@ -35,10 +38,14 @@ const CreateUser = () => {
       <Header text='New User' buttonText=" All Users" onClick={() => history.push('/')} />
       <InputContainer>
         <StyledInput name="name" value={name} placeholder='User Name' onChange={(e) => setName(e.target.value)} />
-        <StyledInput type='file' name='photo' onChange={(e) => setPhoto(e.target.files[0])} />
+        <StyledLabel>
+          <Photo />
+          Photo
+          <StyledInput className='file' type='file' name='photo' onChange={(e) => setPhoto(e.target.files[0])} />
+        </StyledLabel>
         <StyledInput name="email" value={email} placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
         <StyledInput name="location" value={location} placeholder='Location' onChange={(e) => setLocation(e.target.value)} />
-        <StyledButton disabled={name === '' ? true : ''} onClick={handleSubmit}>Submit</StyledButton>
+        <StyledButton disabled={name === '' ? true : ''} onClick={handleSubmit}>Save</StyledButton>
       </InputContainer>
     </Container>
   );
@@ -47,22 +54,6 @@ const CreateUser = () => {
 
 
 
-const InputContainer = styled.div`
 
-width: 300px;
-margin-top:50px;
-display:flex;
-flex-direction: column;
-`
-const StyledInput = styled.input`
-color:red;
-padding: 10px;
-margin-bottom: 10px;
-border: 1px solid #E9E9E9;
-box-sizing: border-box;
-border-radius: 3px;
-&:focus::placeholder {
-  color: transparent;
-}
-`
+
 export default CreateUser
