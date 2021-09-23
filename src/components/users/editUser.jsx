@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSingleUser, updatedUser } from "../../app/api";
+import { getSingleUser, getUsers, updatedUser } from "../../app/api";
 import { useHistory } from "react-router";
 import { Container, InputContainer, StyledButton, StyledInput, StyledLabel } from "./styles";
 import Header from "../header/header";
@@ -35,6 +35,7 @@ const EditUser = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     updatedUser(id, data)
+    getUsers()
     history.push('/')
   };
   return (

@@ -24,7 +24,7 @@ font-size: 18px;
 font-weight: 600;
 line-height: 22px;
 color: #2D3446;
-padding:20px 0;
+padding:25px 0;
 `
 const StyledLine = styled.div`
 width: 100%;

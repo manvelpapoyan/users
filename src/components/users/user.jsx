@@ -1,23 +1,37 @@
-import { deleteUser } from "../../app/api"
+import { deleteUser, getUsers } from "../../app/api"
 import { useHistory } from "react-router"
+import { ReactComponent as Edit } from '../assets/edit.svg'
+import { ReactComponent as Email } from '../assets/email.svg'
+import { ReactComponent as Delete } from '../assets/delete.svg'
+
+
+
 const User = ({ props }) => {
-
-
-  const { photo, name, location, registeredDate, lastActiveDate, email, disabled, id } = props
+  const { photo, name, location, registeredDate, lastActiveDate, id } = props
   const hystory = useHistory()
+
+  const handleClick = (e) => {
+
+    deleteUser(props.id)
+    getUsers()
+
+  }
+
   return (
     <tr >
-      <td>Ch</td>
-      <td><img style={{ cursor: 'pointer' }} src={photo} alt='' onClick={() => hystory.push(`/edit?id=${id}`)} /></td>
-      <td><div style={{ cursor: 'pointer' }} onClick={() => deleteUser(props.id)}>{name}</div></td>
+      <td><Edit style={{ cursor: 'pointer' }} onClick={() => hystory.push(`/edit?id=${id}`)} /></td>
+      <td><img src={photo} alt='' /></td>
+      <td><div  >{name}</div></td>
       <td> {location}</td>
       <td>{registeredDate} </td>
       <td> {lastActiveDate}</td>
-      <td>{email} </td>
-      <td>{disabled} </td>
+      <td><Email /> </td>
+      <td><Delete style={{ cursor: 'pointer' }} onClick={handleClick} /> </td>
     </tr>
   )
 }
+
+
 
 
 export default User

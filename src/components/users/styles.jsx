@@ -37,6 +37,10 @@ border-radius:4px;
 background-color: #407eff;
 border:none;
 color:#fff;
+&:disabled{
+  opacity: 0.5;
+  cursor:not-allowed;
+}
 `
 export const StyledLabel = styled.label`
   display: flex;

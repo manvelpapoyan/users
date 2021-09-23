@@ -6,7 +6,6 @@ const getUsers = async (page = 1, sort = "name", order = "asc") => {
 	const response = await axios.get(
 		`${URL}/users/?_page=${page}&_sort=${sort}&_order=${order}`
 	);
-
 	return response.data;
 };
 

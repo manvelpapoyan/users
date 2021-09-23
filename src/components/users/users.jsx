@@ -7,20 +7,25 @@ import Header from '../header/header'
 import Pagination from '../pagination/pagination'
 import { Container } from './styles'
 import User from './user'
+import { ReactComponent as Sort } from '../assets/sort.svg'
 
 export default function Users() {
   const history = useHistory()
   const [page, setPage] = useState(1)
   const [sort, setSort] = useState('')
-  const [order, setOrder] = useState('')
+  const [order, setOrder] = useState('asc')
   const {
     data,
     isPreviousData,
   } = useQuery(['projects', page, sort, order], () => getUsers(page, sort, order), { keepPreviousData: true })
 
-  const sorting = (sort, order) => {
+  const sorting = (sort) => {
     setSort(sort)
-    setOrder(order)
+    if (order === 'asc') {
+      setOrder('desc')
+    } else {
+      setOrder('asc')
+    }
   }
 
   return (
@@ -32,11 +37,11 @@ export default function Users() {
             <tr>
               <th></th>
               <th>Photo</th>
-              <th>Name</th>
+              <th>Name<Sort onClick={() => sorting('name')} /></th>
               <th>Location</th>
               <th>Registered date</th>
               <th>Last active date</th>
-              <th>Email</th>
+              <th>Email <Sort onClick={() => sorting('email')} /></th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -73,6 +78,7 @@ th{
   font-weight: 600;
   font-size: 12px;
   line-height: 14px;
+  text-align: center;
   color: #788195;
   border: none;
   background: #F1F3F5;
@@ -93,6 +99,8 @@ td{
 }
 
 `
+
+
 
 
 

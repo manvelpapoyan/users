@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
-import { createUser } from "../../app/api";
+import { createUser, getUsers } from "../../app/api";
 import Header from "../header/header";
 import { Container, InputContainer, StyledButton, StyledInput, StyledLabel } from "./styles";
 import { ReactComponent as Photo } from '../assets/photo.svg'
@@ -26,6 +26,7 @@ const CreateUser = () => {
     e.preventDefault()
     const data = { ...initialData, name, email, location, photo }
     createUser(data)
+    getUsers()
     setPhoto(null)
     setName('')
     setEmail('')

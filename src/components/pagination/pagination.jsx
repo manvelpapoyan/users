@@ -34,7 +34,7 @@ const Pagination = ({ page, isPreviousData, setPage }) => {
 
 const Cointanier = styled.div`
 width: 100%;
-margin-top:80px;
+margin-top:70px;
 padding: 50px 0 20px 20px;
 border: 1px solid #E9E9E9;
 box-sizing: border-box;
