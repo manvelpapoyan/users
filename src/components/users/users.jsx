@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
+import { useHistory } from 'react-router'
 import styled from 'styled-components'
 import { getUsers } from '../../app/api'
 import Header from '../header/header'
@@ -7,7 +8,7 @@ import Pagination from '../pagination/pagination'
 import User from './user'
 
 export default function Users() {
-
+  const history = useHistory()
   const [page, setPage] = useState(1)
   const [sort, setSort] = useState('')
   const [order, setOrder] = useState('')
@@ -23,7 +24,7 @@ export default function Users() {
 
   return (
     <Container >
-      <Header text='All Users' />
+      <Header text='All Users' buttonText={'New User'} onClick={() => history.push('/new')} />
       <TableContainer>
         <Table>
           <thead>
@@ -53,9 +54,8 @@ export default function Users() {
 
 
 
-const Container = styled.div`
+export const Container = styled.div`
 width: 100%;
-background-color: #fff;
 padding: 0 42px;
 `
 const TableContainer = styled.div`

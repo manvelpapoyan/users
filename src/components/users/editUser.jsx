@@ -39,8 +39,8 @@ const EditUser = () => {
       <StyledInput type='file' name='photo' onChange={handleChangePhoto} />
       <StyledInput name="email" value={user.email} placeholder='Email' onChange={handleChange} />
       <StyledInput name="location" value={user.location} placeholder='Location' onChange={handleChange} />
-      <button onClick={handleSubmit}>Submit</button>
-    </Container>
+      <button disabled={Object.keys(data).length === 0 ? true : ''} onClick={handleSubmit}>Submit</button>
+    </Container >
   );
 };
 

@@ -1,11 +1,12 @@
 import styled from "styled-components"
 
-const Header = ({ text }) => {
+const Header = ({ text, onClick, buttonText }) => {
 
   return (
     <StyledDiv>
       <StyledText>{text}</StyledText>
       <StyledLine />
+      <StyledButton onClick={onClick}>{buttonText}</StyledButton>
     </StyledDiv>
   )
 }
@@ -29,4 +30,17 @@ width: 100%;
 height: 3px;
 background-color: #E1E6EC;
 margin: 0 20px;
+`
+
+
+export const StyledButton = styled.button`
+min-width: 114px;
+height:36px;
+border-radius:4px;
+background-color: #407eff;
+border:none;
+color:#fff;
+
+
+
 `

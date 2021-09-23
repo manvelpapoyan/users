@@ -1,6 +1,9 @@
 import styled from "styled-components"
 import { ReactComponent as Prev } from '../assets/pagination/previous.svg'
 import { ReactComponent as Next } from '../assets/pagination/next.svg'
+
+
+
 const Pagination = ({ page, isPreviousData, setPage }) => {
 
   return (
@@ -20,7 +23,7 @@ const Pagination = ({ page, isPreviousData, setPage }) => {
           }
         }}
         //Api doesn't have has.more property beacause i disable Button manualy
-        disabled={page === 20}
+        disabled={page === 11}
       >
         <Next />
       </Button>
@@ -56,8 +59,7 @@ color: #fff;
 `
 const Div = styled.div`
 display: inline;
-height: 25px;
-width: 25px;
+
 font-size: 16px;
 font-weight: 600;
 color: black;
