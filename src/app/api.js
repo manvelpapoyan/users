@@ -29,7 +29,7 @@ const createUser = async (data) => {
 };
 
 const postPhoto = async (photo) => {
-	console.log(photo);
+	
 	const formData = new FormData();
 	formData.append("file", photo, photo.name);
 	return await axios.post(`${URL}/images`, formData, {
